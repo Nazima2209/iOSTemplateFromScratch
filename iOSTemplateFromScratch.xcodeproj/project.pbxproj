@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		183BDD83280FDCFA00BD2C58 /* ItunesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD82280FDCFA00BD2C58 /* ItunesResult.swift */; };
+		183BDD86280FEA8700BD2C58 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD85280FEA8700BD2C58 /* Endpoint.swift */; };
+		183BDD88280FF0C400BD2C58 /* ItunesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD87280FF0C400BD2C58 /* ItunesEndpoint.swift */; };
+		183BDD8A280FFB7400BD2C58 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD89280FFB7400BD2C58 /* NetworkManager.swift */; };
+		183BDD8E281029FB00BD2C58 /* UiImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD8D281029FB00BD2C58 /* UiImageView+Extension.swift */; };
 		1862DBFB280E9AA8000D3D02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DBFA280E9AA8000D3D02 /* AppDelegate.swift */; };
 		1862DBFD280E9AA8000D3D02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DBFC280E9AA8000D3D02 /* SceneDelegate.swift */; };
 		1862DBFF280E9AA8000D3D02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DBFE280E9AA8000D3D02 /* ViewController.swift */; };
@@ -42,6 +46,10 @@
 
 /* Begin PBXFileReference section */
 		183BDD82280FDCFA00BD2C58 /* ItunesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesResult.swift; sourceTree = "<group>"; };
+		183BDD85280FEA8700BD2C58 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		183BDD87280FF0C400BD2C58 /* ItunesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesEndpoint.swift; sourceTree = "<group>"; };
+		183BDD89280FFB7400BD2C58 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		183BDD8D281029FB00BD2C58 /* UiImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiImageView+Extension.swift"; sourceTree = "<group>"; };
 		1862DBF7280E9AA8000D3D02 /* iOSTemplateFromScratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTemplateFromScratch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1862DBFA280E9AA8000D3D02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1862DBFC280E9AA8000D3D02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +102,32 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		183BDD84280FEA6E00BD2C58 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				183BDD85280FEA8700BD2C58 /* Endpoint.swift */,
+				183BDD87280FF0C400BD2C58 /* ItunesEndpoint.swift */,
+				183BDD89280FFB7400BD2C58 /* NetworkManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		183BDD8B281029B800BD2C58 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1862DC2C280E9C20000D3D02 /* Coordinator.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		183BDD8C281029CD00BD2C58 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				183BDD8D281029FB00BD2C58 /* UiImageView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1862DBEE280E9AA8000D3D02 = {
 			isa = PBXGroup;
 			children = (
@@ -117,7 +151,9 @@
 		1862DBF9280E9AA8000D3D02 /* iOSTemplateFromScratch */ = {
 			isa = PBXGroup;
 			children = (
-				1862DC2C280E9C20000D3D02 /* Coordinator.swift */,
+				183BDD8C281029CD00BD2C58 /* Extensions */,
+				183BDD8B281029B800BD2C58 /* Common */,
+				183BDD84280FEA6E00BD2C58 /* Networking */,
 				1862DC2E280ECBF8000D3D02 /* Songs */,
 				1862DBFA280E9AA8000D3D02 /* AppDelegate.swift */,
 				1862DBFC280E9AA8000D3D02 /* SceneDelegate.swift */,
@@ -296,10 +332,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183BDD8A280FFB7400BD2C58 /* NetworkManager.swift in Sources */,
+				183BDD8E281029FB00BD2C58 /* UiImageView+Extension.swift in Sources */,
 				1862DC2B280E9BFB000D3D02 /* AppCoordinator.swift in Sources */,
 				1862DBFF280E9AA8000D3D02 /* ViewController.swift in Sources */,
 				1862DC2D280E9C20000D3D02 /* Coordinator.swift in Sources */,
+				183BDD88280FF0C400BD2C58 /* ItunesEndpoint.swift in Sources */,
 				1862DBFB280E9AA8000D3D02 /* AppDelegate.swift in Sources */,
+				183BDD86280FEA8700BD2C58 /* Endpoint.swift in Sources */,
 				1862DBFD280E9AA8000D3D02 /* SceneDelegate.swift in Sources */,
 				1862DC35280EDEC5000D3D02 /* NoResultsCell.swift in Sources */,
 				1862DC31280ECC38000D3D02 /* SongDescriptionCell.swift in Sources */,

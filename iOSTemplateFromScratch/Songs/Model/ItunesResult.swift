@@ -9,12 +9,12 @@ import Foundation
 
 struct ItunesSearchResult: Codable {
     let resultCount: Int
-    let results: ItuneResult
+    let results: [ItuneResult]
 }
 
 struct ItuneResult: Codable {
     let wrapperType, kind: String?
-    let artistId: String?
+    let artistId: Int?
     let collectionId: Int?
     let trackId: Int?
     let artistName: String?
@@ -29,9 +29,9 @@ struct ItuneResult: Codable {
     let artworkUrl30: String?
     let artworkUrl60: String?
     let artworkUrl100: String
-    let collectionPrice: Int?
-    let trackPrice: Int?
-    let releaseDate: Date?
+    let collectionPrice: Double?
+    let trackPrice: Double?
+    let releaseDate: String?
     let collectionExplicitness: String?
     let trackExplicitness: String?
     let discCount: Int?
