@@ -65,7 +65,6 @@ class SongDescriptionCell: UITableViewCell {
             songDescriptionLabel.leadingAnchor.constraint(equalTo: songTitleLabel.leadingAnchor),
             songDescriptionLabel.trailingAnchor.constraint(equalTo: songDescriptionLabel.trailingAnchor),
             //songDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 5.0)
-            
         ])
     }
 }

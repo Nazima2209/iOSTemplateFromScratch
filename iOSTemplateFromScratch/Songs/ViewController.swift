@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        // For rendering Dummy data
-        viewModel.initialiseArray()
-        // Do any additional setup after loading the view.
     }
 
     private lazy var searchController: UISearchController = {
@@ -76,8 +73,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SongDescriptionCell.description(), for: indexPath) as? SongDescriptionCell else { return UITableViewCell() }
-        cell.songTitleLabel.text = viewModel.songsResult[indexPath.row].title
-        cell.songDescriptionLabel.text = viewModel.songsResult[indexPath.row].description
+        cell.songTitleLabel.text = viewModel.songsResult[indexPath.row].trackName
+        cell.songDescriptionLabel.text = viewModel.songsResult[indexPath.row].artistName
         return cell
     }
     
