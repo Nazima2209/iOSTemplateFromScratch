@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.barStyle = .black
         return searchController
     }()
     
