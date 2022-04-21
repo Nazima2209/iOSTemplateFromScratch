@@ -29,6 +29,30 @@ class iOSTemplateFromScratchUITests: XCTestCase {
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func testIfCorrectResultForSearch() {
+        let app = XCUIApplication()
+        app.launch()
+        let resultsTable = app.tables.firstMatch
+        resultsTable.swipeDown()
+        let searchField = app.searchFields.firstMatch
+        searchField.tap()
+        searchField.typeText("wood")
+        print(resultsTable.cells.count)
+        XCTAssert(resultsTable.cells.count > 3)
+    }
+    
+    func testForIfSearchResultEmpty() {
+        let app = XCUIApplication()
+        app.launch()
+        let resultsTable = app.tables.firstMatch
+        resultsTable.swipeDown()
+        let searchField = app.searchFields.firstMatch
+        searchField.tap()
+        searchField.typeText("xiohfcfcgg")
+        XCTAssertEqual(resultsTable.cells.count, 1)
+        XCTAssert(app.staticTexts["You haven't searched anything yet"].exists)
+    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
