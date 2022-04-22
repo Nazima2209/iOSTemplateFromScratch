@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class SongDescriptionCell: UITableViewCell {
-    let songIcon: UIImageView = {
-        let imageView = UIImageView()
+    let songIcon: CacheImageView = {
+        let imageView = CacheImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 4.0
         imageView.clipsToBounds = true
@@ -64,8 +64,15 @@ class SongDescriptionCell: UITableViewCell {
             songDescriptionLabel.topAnchor.constraint(equalTo: songTitleLabel.bottomAnchor, constant: 5.0),
             songDescriptionLabel.leadingAnchor.constraint(equalTo: songTitleLabel.leadingAnchor),
             songDescriptionLabel.trailingAnchor.constraint(equalTo: songDescriptionLabel.trailingAnchor),
-            //songDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 5.0)
-            
+            songDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0)
         ])
+    }
+    
+    func setDataInCell(data: ItuneResult) {
+        songTitleLabel.text = data.trackName
+        songDescriptionLabel.text = data.artistName
+        if let imageUrl = data.artworkUrl30 {
+            songIcon.downloadImageFrom(urlString: imageUrl, imageMode: .scaleAspectFill)
+        }
     }
 }

@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        // For rendering Dummy data
-        viewModel.initialiseArray()
-        // Do any additional setup after loading the view.
     }
 
     private lazy var searchController: UISearchController = {
@@ -23,6 +20,7 @@ class ViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.barStyle = .black
         return searchController
     }()
     
@@ -60,7 +58,28 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print(searchController.searchBar.text)
+        if let searchText = searchController.searchBar.text , !searchText.isEmpty {
+            print(searchText)
+            viewModel.callItunesSearchApi(searchText: searchText) { [weak self] success in
+                guard let self = self else { return }
+                if success {
+                    // stop loading indicator
+                    DispatchQueue.main.async {
+                        self.songsTableView.reloadData()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        let label = UILabel()
+                        label.textAlignment = .center
+                        label.text = "Something went wrong..."
+                        self.songsTableView.backgroundView = label
+                    }
+                }
+            }
+        } else {
+            viewModel.songsResult = []
+            songsTableView.reloadData()
+        }
     }
 }
 
@@ -76,8 +95,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SongDescriptionCell.description(), for: indexPath) as? SongDescriptionCell else { return UITableViewCell() }
-        cell.songTitleLabel.text = viewModel.songsResult[indexPath.row].title
-        cell.songDescriptionLabel.text = viewModel.songsResult[indexPath.row].description
+        cell.setDataInCell(data: viewModel.songsResult[indexPath.row])
         return cell
     }
     
