@@ -105,5 +105,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !viewModel.songsResult.isEmpty {
+            viewModel.delegate?.loadSongDetailsScreen(song: viewModel.songsResult[indexPath.row])
+        }
+    }
 }
 

@@ -72,7 +72,12 @@ class SongDescriptionCell: UITableViewCell {
         songTitleLabel.text = data.trackName
         songDescriptionLabel.text = data.artistName
         if let imageUrl = data.artworkUrl30 {
-            songIcon.downloadImageFrom(urlString: imageUrl, imageMode: .scaleAspectFill)
+            songIcon.downloadImageFrom(urlString: imageUrl, imageMode: .scaleAspectFill) { [weak self] image in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.songIcon.image = image
+                }
+            }
         }
     }
 }

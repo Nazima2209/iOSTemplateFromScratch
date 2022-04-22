@@ -28,7 +28,7 @@ struct ItuneResult: Codable {
     let previewUrl: String?
     let artworkUrl30: String?
     let artworkUrl60: String?
-    let artworkUrl100: String
+    let artworkUrl100: String?
     let collectionPrice: Double?
     let trackPrice: Double?
     let releaseDate: String?

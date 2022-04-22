@@ -7,8 +7,13 @@
 
 import Foundation
 
+protocol ViewModelDelegate: AnyObject {
+    func loadSongDetailsScreen(song: ItuneResult)
+}
+
 class ViewModel {
     var songsResult: [ItuneResult] = []
+    weak var delegate: ViewModelDelegate?
     
     func callItunesSearchApi(searchText: String, completion: @escaping(Bool)->Void) {
         let endpoint = ItunesEndpoint(searchText: searchText)

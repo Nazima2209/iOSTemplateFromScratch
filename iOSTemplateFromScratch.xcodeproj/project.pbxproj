@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1828B03A2812A109006C4701 /* ItunesAPIEndPointTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0382812A109006C4701 /* ItunesAPIEndPointTest.swift */; };
 		1828B03B2812A109006C4701 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0392812A109006C4701 /* NetworkManagerTest.swift */; };
+		1828B03E2812B1F2006C4701 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B03D2812B1F2006C4701 /* DetailsViewController.swift */; };
+		1828B0402812B6B0006C4701 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B03F2812B6B0006C4701 /* DetailsViewModel.swift */; };
+		1828B0422812B6C0006C4701 /* DetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0412812B6C0006C4701 /* DetailsCoordinator.swift */; };
+		1828B0442812C615006C4701 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0432812C615006C4701 /* BaseViewController.swift */; };
 		183BDD83280FDCFA00BD2C58 /* ItunesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD82280FDCFA00BD2C58 /* ItunesResult.swift */; };
 		183BDD86280FEA8700BD2C58 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD85280FEA8700BD2C58 /* Endpoint.swift */; };
 		183BDD88280FF0C400BD2C58 /* ItunesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD87280FF0C400BD2C58 /* ItunesEndpoint.swift */; };
@@ -22,7 +26,7 @@
 		1862DC12280E9AAA000D3D02 /* iOSTemplateFromScratchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC11280E9AAA000D3D02 /* iOSTemplateFromScratchTests.swift */; };
 		1862DC1C280E9AAA000D3D02 /* iOSTemplateFromScratchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC1B280E9AAA000D3D02 /* iOSTemplateFromScratchUITests.swift */; };
 		1862DC1E280E9AAA000D3D02 /* iOSTemplateFromScratchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC1D280E9AAA000D3D02 /* iOSTemplateFromScratchUITestsLaunchTests.swift */; };
-		1862DC2B280E9BFB000D3D02 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC2A280E9BFB000D3D02 /* AppCoordinator.swift */; };
+		1862DC2B280E9BFB000D3D02 /* ViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC2A280E9BFB000D3D02 /* ViewCoordinator.swift */; };
 		1862DC2D280E9C20000D3D02 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC2C280E9C20000D3D02 /* Coordinator.swift */; };
 		1862DC31280ECC38000D3D02 /* SongDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC30280ECC38000D3D02 /* SongDescriptionCell.swift */; };
 		1862DC33280ED69C000D3D02 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862DC32280ED69C000D3D02 /* ViewModel.swift */; };
@@ -49,6 +53,10 @@
 /* Begin PBXFileReference section */
 		1828B0382812A109006C4701 /* ItunesAPIEndPointTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesAPIEndPointTest.swift; sourceTree = "<group>"; };
 		1828B0392812A109006C4701 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
+		1828B03D2812B1F2006C4701 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		1828B03F2812B6B0006C4701 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		1828B0412812B6C0006C4701 /* DetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCoordinator.swift; sourceTree = "<group>"; };
+		1828B0432812C615006C4701 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		183BDD82280FDCFA00BD2C58 /* ItunesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesResult.swift; sourceTree = "<group>"; };
 		183BDD85280FEA8700BD2C58 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		183BDD87280FF0C400BD2C58 /* ItunesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesEndpoint.swift; sourceTree = "<group>"; };
@@ -66,7 +74,7 @@
 		1862DC17280E9AAA000D3D02 /* iOSTemplateFromScratchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTemplateFromScratchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1862DC1B280E9AAA000D3D02 /* iOSTemplateFromScratchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTemplateFromScratchUITests.swift; sourceTree = "<group>"; };
 		1862DC1D280E9AAA000D3D02 /* iOSTemplateFromScratchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTemplateFromScratchUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		1862DC2A280E9BFB000D3D02 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		1862DC2A280E9BFB000D3D02 /* ViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoordinator.swift; sourceTree = "<group>"; };
 		1862DC2C280E9C20000D3D02 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1862DC30280ECC38000D3D02 /* SongDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDescriptionCell.swift; sourceTree = "<group>"; };
 		1862DC32280ED69C000D3D02 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -98,6 +106,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1828B03C2812B084006C4701 /* SongDetails */ = {
+			isa = PBXGroup;
+			children = (
+				1828B03D2812B1F2006C4701 /* DetailsViewController.swift */,
+				1828B03F2812B6B0006C4701 /* DetailsViewModel.swift */,
+				1828B0412812B6C0006C4701 /* DetailsCoordinator.swift */,
+			);
+			path = SongDetails;
+			sourceTree = "<group>";
+		};
 		183BDD81280FDCDF00BD2C58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				1862DC2C280E9C20000D3D02 /* Coordinator.swift */,
+				1828B0432812C615006C4701 /* BaseViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -158,6 +177,7 @@
 				183BDD8C281029CD00BD2C58 /* Extensions */,
 				183BDD8B281029B800BD2C58 /* Common */,
 				183BDD84280FEA6E00BD2C58 /* Networking */,
+				1828B03C2812B084006C4701 /* SongDetails */,
 				1862DC2E280ECBF8000D3D02 /* Songs */,
 				1862DBFA280E9AA8000D3D02 /* AppDelegate.swift */,
 				1862DBFC280E9AA8000D3D02 /* SceneDelegate.swift */,
@@ -190,9 +210,9 @@
 		1862DC2E280ECBF8000D3D02 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
-				183BDD81280FDCDF00BD2C58 /* Model */,
-				1862DC2A280E9BFB000D3D02 /* AppCoordinator.swift */,
 				1862DC2F280ECC0A000D3D02 /* CustomCells */,
+				183BDD81280FDCDF00BD2C58 /* Model */,
+				1862DC2A280E9BFB000D3D02 /* ViewCoordinator.swift */,
 				1862DBFE280E9AA8000D3D02 /* ViewController.swift */,
 				1862DC32280ED69C000D3D02 /* ViewModel.swift */,
 			);
@@ -340,15 +360,19 @@
 			files = (
 				183BDD8A280FFB7400BD2C58 /* NetworkManager.swift in Sources */,
 				183BDD8E281029FB00BD2C58 /* UiImageView+Extension.swift in Sources */,
-				1862DC2B280E9BFB000D3D02 /* AppCoordinator.swift in Sources */,
+				1828B0402812B6B0006C4701 /* DetailsViewModel.swift in Sources */,
+				1862DC2B280E9BFB000D3D02 /* ViewCoordinator.swift in Sources */,
 				1862DBFF280E9AA8000D3D02 /* ViewController.swift in Sources */,
 				1862DC2D280E9C20000D3D02 /* Coordinator.swift in Sources */,
 				183BDD88280FF0C400BD2C58 /* ItunesEndpoint.swift in Sources */,
+				1828B0442812C615006C4701 /* BaseViewController.swift in Sources */,
 				1862DBFB280E9AA8000D3D02 /* AppDelegate.swift in Sources */,
 				183BDD86280FEA8700BD2C58 /* Endpoint.swift in Sources */,
 				1862DBFD280E9AA8000D3D02 /* SceneDelegate.swift in Sources */,
 				1862DC35280EDEC5000D3D02 /* NoResultsCell.swift in Sources */,
 				1862DC31280ECC38000D3D02 /* SongDescriptionCell.swift in Sources */,
+				1828B03E2812B1F2006C4701 /* DetailsViewController.swift in Sources */,
+				1828B0422812B6C0006C4701 /* DetailsCoordinator.swift in Sources */,
 				1862DC33280ED69C000D3D02 /* ViewModel.swift in Sources */,
 				183BDD83280FDCFA00BD2C58 /* ItunesResult.swift in Sources */,
 			);

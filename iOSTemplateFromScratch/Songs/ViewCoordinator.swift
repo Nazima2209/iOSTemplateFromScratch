@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AppCoordinator: Coordinator {
+class ViewCoordinator: Coordinator {
     var navigationController: UINavigationController
     
     var childCoordinator = [Coordinator]()
@@ -18,7 +18,15 @@ class AppCoordinator: Coordinator {
     
     func start() {
         let rootVc = ViewController()
+        rootVc.viewModel.delegate = self
         self.navigationController.pushViewController(rootVc, animated: true)
+    }
+}
+
+extension ViewCoordinator: ViewModelDelegate {
+    func loadSongDetailsScreen(song: ItuneResult) {
+        let detailsCoordinator = DetailsCoordinator(navigationController: navigationController, song: song)
+        detailsCoordinator.start()
     }
 }
 
