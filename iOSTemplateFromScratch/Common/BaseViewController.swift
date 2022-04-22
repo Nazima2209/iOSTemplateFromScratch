@@ -19,9 +19,16 @@ class BaseViewController: UIViewController {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor.red
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.prefersLargeTitles = true
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 22.0)]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 22.0)]
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 22.0)]
+        navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationItem.title = title
+        navigationController?.navigationBar.topItem?.backButtonTitle = "back"
+        navigationController?.navigationBar.topItem?.titleView?.backgroundColor = UIColor.yellow
+        navigationController?.navigationBar.topItem?.title = title
+        self.title = title
     }
 }

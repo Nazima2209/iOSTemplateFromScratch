@@ -30,11 +30,11 @@ class DetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        setUpNavBar(title: "Song Details")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setUpNavBar(title: "Song Details")
     }
     
     func setUp() {
