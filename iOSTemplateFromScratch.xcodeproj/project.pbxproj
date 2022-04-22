@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1828B03A2812A109006C4701 /* ItunesAPIEndPointTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0382812A109006C4701 /* ItunesAPIEndPointTest.swift */; };
+		1828B03B2812A109006C4701 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0392812A109006C4701 /* NetworkManagerTest.swift */; };
 		183BDD83280FDCFA00BD2C58 /* ItunesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD82280FDCFA00BD2C58 /* ItunesResult.swift */; };
 		183BDD86280FEA8700BD2C58 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD85280FEA8700BD2C58 /* Endpoint.swift */; };
 		183BDD88280FF0C400BD2C58 /* ItunesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BDD87280FF0C400BD2C58 /* ItunesEndpoint.swift */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1828B0382812A109006C4701 /* ItunesAPIEndPointTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesAPIEndPointTest.swift; sourceTree = "<group>"; };
+		1828B0392812A109006C4701 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		183BDD82280FDCFA00BD2C58 /* ItunesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesResult.swift; sourceTree = "<group>"; };
 		183BDD85280FEA8700BD2C58 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		183BDD87280FF0C400BD2C58 /* ItunesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesEndpoint.swift; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 		1862DC10280E9AAA000D3D02 /* iOSTemplateFromScratchTests */ = {
 			isa = PBXGroup;
 			children = (
+				1828B0382812A109006C4701 /* ItunesAPIEndPointTest.swift */,
+				1828B0392812A109006C4701 /* NetworkManagerTest.swift */,
 				1862DC11280E9AAA000D3D02 /* iOSTemplateFromScratchTests.swift */,
 			);
 			path = iOSTemplateFromScratchTests;
@@ -352,7 +358,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1828B03B2812A109006C4701 /* NetworkManagerTest.swift in Sources */,
 				1862DC12280E9AAA000D3D02 /* iOSTemplateFromScratchTests.swift in Sources */,
+				1828B03A2812A109006C4701 /* ItunesAPIEndPointTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

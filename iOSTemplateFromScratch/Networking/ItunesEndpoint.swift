@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct ItunesEndpoint: Endpoint {
+struct ItunesEndpoint: Endpoint, Equatable {
     var searchText: String
+    var testFailure: Bool = false
     var scheme: String {
         return "https"
     }
@@ -18,7 +19,7 @@ struct ItunesEndpoint: Endpoint {
     }
     
     var path: String {
-        return "/search"
+        return testFailure ? "/fail" : "/search"
     }
     
     var method: String {

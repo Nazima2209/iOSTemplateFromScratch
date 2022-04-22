@@ -30,7 +30,7 @@ class iOSTemplateFromScratchUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func testIfCorrectResultForSearch() {
+    func test_For_valid_song_returns_result_as_list_of_songs() {
         let app = XCUIApplication()
         app.launch()
         let resultsTable = app.tables.firstMatch
@@ -42,7 +42,7 @@ class iOSTemplateFromScratchUITests: XCTestCase {
         XCTAssert(resultsTable.cells.count > 3)
     }
     
-    func testForIfSearchResultEmpty() {
+    func test_For_invalid_song_returns_result_as_empty_list() {
         let app = XCUIApplication()
         app.launch()
         let resultsTable = app.tables.firstMatch
