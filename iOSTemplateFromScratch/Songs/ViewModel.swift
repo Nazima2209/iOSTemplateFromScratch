@@ -28,12 +28,12 @@ class ViewModel {
     let itunesService: ItunesAPIService
     var songsResult: [ItuneResult] = []
     weak var delegate: ViewModelDelegate?
-    
+
     init(itunes: ItunesAPIService) {
         itunesService = itunes
     }
-    
-    func callItunesSearchApi(searchText: String, completion: @escaping(Bool)->Void) {
+
+    func callItunesSearchApi(searchText: String, completion: @escaping(Bool) -> Void) {
         itunesService.searchSong(searchText: searchText) { result in
             switch result {
             case .success(let itunesSearchResult):

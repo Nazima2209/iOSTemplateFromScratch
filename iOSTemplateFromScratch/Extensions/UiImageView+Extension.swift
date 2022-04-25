@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 class CacheImageView: UIImageView {
-    
-    let imageCache = NSCache< NSString, AnyObject >()
+
+    let imageCache = NSCache < NSString, AnyObject > ()
     var imageURl: String?
-    
-    func downloadImageFrom(urlString: String, imageMode: UIView.ContentMode, completion: @escaping(_ image: UIImage?) -> Void ) {
+
+    func downloadImageFrom(urlString: String, imageMode: UIView.ContentMode, completion: @escaping(_ image: UIImage?) -> Void) {
         guard let url = URL(string: urlString) else { return }
         contentMode = imageMode
         //completion(nil)

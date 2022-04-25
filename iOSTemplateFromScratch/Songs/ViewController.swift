@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+
     let viewModel: ViewModel
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +19,11 @@ class ViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         searchController.searchBar.barStyle = .black
         return searchController
     }()
-    
+
     let songsTableView: UITableView = {
         let tableview = UITableView()
         tableview.register(SongDescriptionCell.self, forCellReuseIdentifier: SongDescriptionCell.description())
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         tableview.translatesAutoresizingMaskIntoConstraints = false
         return tableview
     }()
-    
+
     func setupUI() {
         self.view.addSubview(songsTableView)
         let margins = view.layoutMarginsGuide
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         songsTableView.delegate = self
         addSearchBarToNav()
     }
-    
+
     func addSearchBarToNav() {
         let appearance = UINavigationBarAppearance()
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text , !searchText.isEmpty {
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
             print(searchText)
             viewModel.callItunesSearchApi(searchText: searchText) { [weak self] success in
                 guard let self = self else { return }
@@ -96,7 +96,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.songsResult.isEmpty ? 1 : viewModel.songsResult.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if viewModel.songsResult.isEmpty {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NoResultsCell.description()) as? NoResultsCell else { return UITableViewCell() }
@@ -107,14 +107,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setDataInCell(data: viewModel.songsResult[indexPath.row])
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if viewModel.songsResult.isEmpty {
             return tableView.frame.size.height
         }
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !viewModel.songsResult.isEmpty {
             viewModel.delegate?.loadSongDetailsScreen(song: viewModel.songsResult[indexPath.row])

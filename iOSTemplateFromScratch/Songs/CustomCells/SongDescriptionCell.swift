@@ -16,7 +16,7 @@ class SongDescriptionCell: UITableViewCell {
         imageView.clipsToBounds = true
         return imageView
     }()
-    
+
     let songTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
@@ -26,7 +26,7 @@ class SongDescriptionCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     let songDescriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
@@ -36,16 +36,16 @@ class SongDescriptionCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setUp() {
         addSubview(songIcon)
         addSubview(songTitleLabel)
@@ -65,9 +65,9 @@ class SongDescriptionCell: UITableViewCell {
             songDescriptionLabel.leadingAnchor.constraint(equalTo: songTitleLabel.leadingAnchor),
             songDescriptionLabel.trailingAnchor.constraint(equalTo: songDescriptionLabel.trailingAnchor),
             songDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0)
-        ])
+            ])
     }
-    
+
     func setDataInCell(data: ItuneResult) {
         songTitleLabel.text = data.trackName
         songDescriptionLabel.text = data.artistName

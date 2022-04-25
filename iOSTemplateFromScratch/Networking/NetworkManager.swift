@@ -8,14 +8,14 @@
 import Foundation
 
 class NetworkManager {
-    static func callAPI(endpoint: Endpoint, completion: @escaping(_ result: Result<Any?, Error>)-> Void) {
+    static func callAPI(endpoint: Endpoint, completion: @escaping(_ result: Result<Any?, Error>) -> Void) {
         var urlComponents = URLComponents()
         urlComponents.path = endpoint.path
         urlComponents.scheme = endpoint.scheme
         urlComponents.queryItems = endpoint.params
         urlComponents.host = endpoint.baseUrl
         urlComponents.port = endpoint.port
-        guard let url = urlComponents.url else { return  }
+        guard let url = urlComponents.url else { return }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endpoint.method
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
