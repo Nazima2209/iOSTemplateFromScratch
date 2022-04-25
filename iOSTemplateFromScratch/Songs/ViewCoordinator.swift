@@ -17,7 +17,9 @@ class ViewCoordinator: Coordinator {
     }
     
     func start() {
-        let rootVc = ViewController()
+        let itunesAPIService = ItunesAPIService()
+        let viewModel = ViewModel(itunes: itunesAPIService)
+        let rootVc = ViewController(viewModel: viewModel)
         rootVc.viewModel.delegate = self
         self.navigationController.pushViewController(rootVc, animated: true)
     }
