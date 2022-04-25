@@ -19,11 +19,12 @@ class NetworkManager {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endpoint.method
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
+            guard let error = error else {
+                completion(.failure(error!))
                 return
             }
             guard response != nil, let data = data else {
+                completion(.failure(error))
                 return
             }
             do {
