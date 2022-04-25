@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import AVFoundation
 
 class iOSTemplateFromScratchUITests: XCTestCase {
 
@@ -40,6 +41,18 @@ class iOSTemplateFromScratchUITests: XCTestCase {
         searchField.typeText("wood")
         print(resultsTable.cells.count)
         XCTAssert(resultsTable.cells.count > 3)
+    }
+    
+    func test_For_song_tap_navigates_to_details() {
+        let app = XCUIApplication()
+        app.launch()
+        let resultsTable = app.tables.firstMatch
+        resultsTable.swipeDown()
+        let searchField = app.searchFields.firstMatch
+        searchField.tap()
+        searchField.typeText("wood")
+        print(resultsTable.cells.count)
+        resultsTable.cells.firstMatch.tap()
     }
     
     func test_For_invalid_song_returns_result_as_empty_list() {

@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct ItunesSearchResult: Codable {
+struct ItunesSearchResult: Codable, Equatable {
+    static func == (lhs: ItunesSearchResult, rhs: ItunesSearchResult) -> Bool {
+        lhs.resultCount == rhs.resultCount
+    }
+    
     let resultCount: Int
     let results: [ItuneResult]
 }

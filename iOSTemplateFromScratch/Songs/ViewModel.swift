@@ -38,6 +38,7 @@ class ViewModel {
             switch result {
             case .success(let itunesSearchResult):
                 if let result = itunesSearchResult as? ItunesSearchResult {
+                    print(result)
                     let itunesResult = result.results
                     if itunesResult.isEmpty {
                         self.songsResult = []
