@@ -25,15 +25,19 @@ protocol ViewModelDelegate: AnyObject {
 }
 
 class ViewModel {
-    let itunesService: ItunesAPIService
+    var itunesService: ItunesAPIServiceProtocol?
     var songsResult: [ItuneResult] = []
     weak var delegate: ViewModelDelegate?
 
-    init(itunes: ItunesAPIService) {
+    init(itunes: ItunesAPIServiceProtocol) {
         itunesService = itunes
     }
 
     func callItunesSearchApi(searchText: String, completion: @escaping(Bool) -> Void) {
+        guard let itunesService = itunesService else {
+            completion(false)
+            return
+        }
         itunesService.searchSong(searchText: searchText) { result in
             switch result {
             case .success(let itunesSearchResult):

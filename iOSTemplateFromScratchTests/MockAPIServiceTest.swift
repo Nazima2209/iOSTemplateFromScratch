@@ -29,7 +29,7 @@ class MockAPIServiceTest: ItunesAPIServiceProtocol {
         {"resultCount":25,"results": [{"wrapperType":"track"}]
     """
 
-    init(shouldReturnSuccess: Bool) {
+    init(shouldReturnSuccess: Bool = true) {
         self.shouldReturnSuccess = shouldReturnSuccess
     }
 

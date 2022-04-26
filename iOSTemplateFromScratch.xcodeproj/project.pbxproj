@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1822014E2817D90200407313 /* MockAPIServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1822014D2817D90200407313 /* MockAPIServiceTest.swift */; };
+		1822015028180A9500407313 /* ViewModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1822014F28180A9400407313 /* ViewModelTestCase.swift */; };
 		1828B03A2812A109006C4701 /* ItunesAPIEndPointTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0382812A109006C4701 /* ItunesAPIEndPointTest.swift */; };
 		1828B03B2812A109006C4701 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B0392812A109006C4701 /* NetworkManagerTest.swift */; };
 		1828B03E2812B1F2006C4701 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B03D2812B1F2006C4701 /* DetailsViewController.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		1822014D2817D90200407313 /* MockAPIServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIServiceTest.swift; sourceTree = "<group>"; };
+		1822014F28180A9400407313 /* ViewModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTestCase.swift; sourceTree = "<group>"; };
 		1828B0382812A109006C4701 /* ItunesAPIEndPointTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesAPIEndPointTest.swift; sourceTree = "<group>"; };
 		1828B0392812A109006C4701 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		1828B03D2812B1F2006C4701 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				1828B0392812A109006C4701 /* NetworkManagerTest.swift */,
 				1862DC11280E9AAA000D3D02 /* iOSTemplateFromScratchTests.swift */,
 				1822014D2817D90200407313 /* MockAPIServiceTest.swift */,
+				1822014F28180A9400407313 /* ViewModelTestCase.swift */,
 			);
 			path = iOSTemplateFromScratchTests;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				1822014E2817D90200407313 /* MockAPIServiceTest.swift in Sources */,
 				1828B03B2812A109006C4701 /* NetworkManagerTest.swift in Sources */,
 				1862DC12280E9AAA000D3D02 /* iOSTemplateFromScratchTests.swift in Sources */,
+				1822015028180A9500407313 /* ViewModelTestCase.swift in Sources */,
 				1828B03A2812A109006C4701 /* ItunesAPIEndPointTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
