@@ -40,14 +40,14 @@ class MockAPIServiceTest: ItunesAPIServiceProtocol {
         }
         do {
             guard let data = testString.data(using: .utf8) else {
-                completion(.failure(ErrorTypes.jsonToDataConversionError))
+                completion(.failure(CustomError.jsonToDataConversionError))
                 return
             }
             let songsResult = try JSONDecoder().decode(ItunesSearchResult.self, from: data)
             completion(.success(songsResult))
         } catch {
             print("shouldn't happen")
-            completion(.failure(ErrorTypes.parsingError))
+            completion(.failure(CustomError.parsingError))
         }
     }
 }

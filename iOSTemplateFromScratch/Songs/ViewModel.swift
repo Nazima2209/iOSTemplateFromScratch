@@ -47,7 +47,8 @@ class ViewModel {
                     }
                     completion(true)
                 }
-            case .failure(_):
+            case .failure(let error):
+                print(error.localizedDescription)
                 self.songsResult = []
                 completion(false)
             }

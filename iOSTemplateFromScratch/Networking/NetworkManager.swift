@@ -7,6 +7,22 @@
 
 import Foundation
 
+enum CustomError: Error, LocalizedError {
+    case noDataError
+    case parsingError
+    case jsonToDataConversionError
+    var errorDescription: String? {
+        switch self {
+        case .noDataError:
+            return NSLocalizedString("noDataFoundError", comment: "No data found")
+        case .parsingError:
+            return NSLocalizedString("parsingDataError", comment: "Unable to parse data")
+        case .jsonToDataConversionError:
+            return NSLocalizedString("jsonToDataConversionError", comment: "Unable to encode json to data")
+        }
+    }
+}
+
 class NetworkManager {
     static func callAPI(endpoint: Endpoint, completion: @escaping(_ result: Result<Any?, Error>) -> Void) {
         var urlComponents = URLComponents()
@@ -24,7 +40,7 @@ class NetworkManager {
                 return
             }
             guard response != nil, let data = data else {
-                completion(.failure(error!))
+                completion(.failure(CustomError.noDataError))
                 return
             }
             do {
@@ -32,7 +48,7 @@ class NetworkManager {
                 completion(.success(result))
             } catch let error {
                 print(error)
-                completion(.failure(error))
+                completion(.failure(CustomError.parsingError))
             }
         }
         task.resume()
