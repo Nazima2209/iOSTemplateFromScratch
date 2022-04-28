@@ -7,18 +7,55 @@
 
 import Foundation
 
-struct SongDataModel {
-    let icon: String
-    let title: String
-    let description: String
+protocol ItunesAPIServiceProtocol {
+    func searchSong(searchText: String, completion: @escaping(_ result: Result<Any?, Error>) -> Void)
+}
+
+struct ItunesAPIService: ItunesAPIServiceProtocol {
+    func searchSong(searchText: String, completion: @escaping (Result<Any?, Error>) -> Void) {
+        let endpoint = ItunesEndpoint(searchText: searchText)
+        NetworkManager.callAPI(endpoint: endpoint) { result in
+            completion(result)
+        }
+    }
+}
+
+protocol ViewModelDelegate: AnyObject {
+    func loadSongDetailsScreen(song: ItuneResult)
 }
 
 class ViewModel {
-    var songsResult: [SongDataModel] = []
-    func initialiseArray() {
-        let dummyData1 = SongDataModel(icon: "", title: "title_1", description: "title_1")
-        songsResult.append(dummyData1)
-        let dummyData2 = SongDataModel(icon: "", title: "title_2", description: "title_2")
-        songsResult.append(dummyData2)
+    var itunesService: ItunesAPIServiceProtocol?
+    var songsResult: [ItuneResult] = []
+    weak var delegate: ViewModelDelegate?
+
+    init(itunes: ItunesAPIServiceProtocol) {
+        itunesService = itunes
+    }
+
+    func callItunesSearchApi(searchText: String, completion: @escaping(Bool) -> Void) {
+        guard let itunesService = itunesService else {
+            completion(false)
+            return
+        }
+        itunesService.searchSong(searchText: searchText) { result in
+            switch result {
+            case .success(let itunesSearchResult):
+                if let result = itunesSearchResult as? ItunesSearchResult {
+                    print(result)
+                    let itunesResult = result.results
+                    if itunesResult.isEmpty {
+                        self.songsResult = []
+                    } else {
+                        self.songsResult = itunesResult
+                    }
+                    completion(true)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                self.songsResult = []
+                completion(false)
+            }
+        }
     }
 }
