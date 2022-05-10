@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_iOSTemplateFromScratch_iOSTemplateFromScratchUITests : NSObject
+@end
+@implementation PodsDummy_Pods_iOSTemplateFromScratch_iOSTemplateFromScratchUITests
+@end

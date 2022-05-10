@@ -6,26 +6,36 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, Identifiable {
 
-    let viewModel = ViewModel()
+    let viewModel: ViewModel
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        // For rendering Dummy data
-        viewModel.initialiseArray()
-        // Do any additional setup after loading the view.
+        bindViews(to: viewModel)
+        setupErrorBinding()
+    }
+
+    init (viewModel: ViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.barStyle = .black
         return searchController
     }()
-    
+
     let songsTableView: UITableView = {
         let tableview = UITableView()
         tableview.register(SongDescriptionCell.self, forCellReuseIdentifier: SongDescriptionCell.description())
@@ -33,7 +43,7 @@ class ViewController: UIViewController {
         tableview.translatesAutoresizingMaskIntoConstraints = false
         return tableview
     }()
-    
+
     func setupUI() {
         self.view.addSubview(songsTableView)
         let margins = view.layoutMarginsGuide
@@ -41,11 +51,9 @@ class ViewController: UIViewController {
         songsTableView.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         songsTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         songsTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        songsTableView.dataSource = self
-        songsTableView.delegate = self
         addSearchBarToNav()
     }
-    
+
     func addSearchBarToNav() {
         let appearance = UINavigationBarAppearance()
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -56,36 +64,39 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
     }
-}
 
-extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        print(searchController.searchBar.text)
-    }
-}
-
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.songsResult.isEmpty ? 1 : viewModel.songsResult.count
+    func bindViews(to viewModel: ViewModel) {
+        viewModel.output.content.drive(songsTableView.rx.items(cellIdentifier: SongDescriptionCell.description(), cellType: SongDescriptionCell.self)) { (_, song, cell) in
+            cell.setDataInCell(data: song)
+        }.disposed(by: disposeBag)
+        
+        songsTableView.rx.modelSelected(ItuneResult.self)
+            .bind(to: viewModel.input.selectContent)
+            .disposed(by: disposeBag)
+    
+        searchController.searchBar.rx
+            .text
+            .orEmpty
+            .bind(to: viewModel.input.searchSubject)
+            .disposed(by: disposeBag)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if viewModel.songsResult.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: NoResultsCell.description()) as? NoResultsCell else { return UITableViewCell() }
-            cell.noResultLabel.text = "You haven't searched anything yet"
-            return cell
-        }
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SongDescriptionCell.description(), for: indexPath) as? SongDescriptionCell else { return UITableViewCell() }
-        cell.songTitleLabel.text = viewModel.songsResult[indexPath.row].title
-        cell.songDescriptionLabel.text = viewModel.songsResult[indexPath.row].description
-        return cell
+    private func setupErrorBinding() {
+        viewModel
+            .output
+            .error.asDriver(onErrorJustReturn: "")
+            .drive(onNext: { [weak self] error in
+                guard let self = self else {
+                    return
+                }
+                self.showAlert(alertMessage: error?.description ?? "")
+            })
+            .disposed(by: disposeBag)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if viewModel.songsResult.isEmpty {
-            return tableView.frame.size.height
-        }
-        return UITableView.automaticDimension
+    private func showAlert(alertMessage:String) {
+        let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
-

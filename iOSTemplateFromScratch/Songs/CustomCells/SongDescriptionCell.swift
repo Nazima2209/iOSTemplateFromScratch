@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 class SongDescriptionCell: UITableViewCell {
-    let songIcon: UIImageView = {
-        let imageView = UIImageView()
+    let songIcon: CacheImageView = {
+        let imageView = CacheImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 4.0
         imageView.clipsToBounds = true
         return imageView
     }()
-    
+
     let songTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
@@ -26,7 +26,7 @@ class SongDescriptionCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     let songDescriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
@@ -36,16 +36,16 @@ class SongDescriptionCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setUp() {
         addSubview(songIcon)
         addSubview(songTitleLabel)
@@ -64,8 +64,20 @@ class SongDescriptionCell: UITableViewCell {
             songDescriptionLabel.topAnchor.constraint(equalTo: songTitleLabel.bottomAnchor, constant: 5.0),
             songDescriptionLabel.leadingAnchor.constraint(equalTo: songTitleLabel.leadingAnchor),
             songDescriptionLabel.trailingAnchor.constraint(equalTo: songDescriptionLabel.trailingAnchor),
-            //songDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 5.0)
-            
-        ])
+            songDescriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0)
+            ])
+    }
+
+    func setDataInCell(data: ItuneResult) {
+        songTitleLabel.text = data.trackName
+        songDescriptionLabel.text = data.artistName
+        if let imageUrl = data.artworkUrl30 {
+            songIcon.downloadImageFrom(urlString: imageUrl, imageMode: .scaleAspectFill) { [weak self] image in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.songIcon.image = image
+                }
+            }
+        }
     }
 }
