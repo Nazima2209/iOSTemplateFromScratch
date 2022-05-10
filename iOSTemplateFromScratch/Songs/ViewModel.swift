@@ -6,17 +6,18 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol ItunesAPIServiceProtocol {
-    func searchSong(searchText: String, completion: @escaping(_ result: Result<Any?, Error>) -> Void)
+    func searchSong(searchText: String) -> Observable<ItunesSearchResult>
 }
 
 struct ItunesAPIService: ItunesAPIServiceProtocol {
-    func searchSong(searchText: String, completion: @escaping (Result<Any?, Error>) -> Void) {
+    func searchSong(searchText: String) -> Observable<ItunesSearchResult> {
         let endpoint = ItunesEndpoint(searchText: searchText)
-        NetworkManager.callAPI(endpoint: endpoint) { result in
-            completion(result)
-        }
+        let result: Observable<ItunesSearchResult> = NetworkManager.callAPI(endpoint: endpoint)
+        return result
     }
 }
 
@@ -24,38 +25,69 @@ protocol ViewModelDelegate: AnyObject {
     func loadSongDetailsScreen(song: ItuneResult)
 }
 
-class ViewModel {
-    var itunesService: ItunesAPIServiceProtocol?
-    var songsResult: [ItuneResult] = []
-    weak var delegate: ViewModelDelegate?
+class ViewModel: ViewModelType {
+    var input = Input()
+    var output: Output
+    var itunesService: ItunesAPIServiceProtocol
+    private let disposeBag = DisposeBag()
 
-    init(itunes: ItunesAPIServiceProtocol) {
-        itunesService = itunes
+    struct Input {
+        let searchSubject = PublishSubject<String>()
+        var searchObserver: AnyObserver<String> {
+            return searchSubject.asObserver()
+        }
+        let selectContent = PublishRelay<ItuneResult>()
     }
 
-    func callItunesSearchApi(searchText: String, completion: @escaping(Bool) -> Void) {
-        guard let itunesService = itunesService else {
-            completion(false)
-            return
+    struct Output {
+        let contentSubject = BehaviorRelay<[ItuneResult]>(value: [])
+        var content: Driver<[ItuneResult]> {
+            return contentSubject.asDriver(onErrorJustReturn: [])
         }
-        itunesService.searchSong(searchText: searchText) { result in
-            switch result {
-            case .success(let itunesSearchResult):
-                if let result = itunesSearchResult as? ItunesSearchResult {
-                    print(result)
-                    let itunesResult = result.results
-                    if itunesResult.isEmpty {
-                        self.songsResult = []
-                    } else {
-                        self.songsResult = itunesResult
-                    }
-                    completion(true)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                self.songsResult = []
-                completion(false)
+        let errorSubject = PublishSubject<String?>()
+        var error: Driver<String?> {
+            return errorSubject.asDriver(onErrorJustReturn: "Error")
+        }
+        let showDetail: Observable<ItuneResult>
+    }
+
+    init(itunes: ItunesAPIServiceProtocol) {
+        self.itunesService = itunes
+        self.output = Output(showDetail: input.selectContent.asObservable())
+        input.searchSubject
+            .asObservable()
+            .filter { !$0.isEmpty }
+            .distinctUntilChanged()
+            .debounce(0.2, scheduler: MainScheduler.instance)
+            .flatMapLatest { [weak self] text -> Observable<ItunesSearchResult> in
+            return (self?.itunesService.searchSong(searchText: text)
+                    .catchError({ [weak self] error -> Observable<ItunesSearchResult> in
+                    self?.output.errorSubject.onNext("Error")
+                    self?.output.contentSubject.accept([])
+                    return Observable.empty()
+                }))!
+        }
+            .map {
+            $0.results
+        }
+            .subscribe(onNext: { element in
+            if element.isEmpty {
+                self.output.errorSubject.onNext("Result not found")
+                self.output.contentSubject.accept([])
+            } else {
+                self.output.contentSubject.accept(element)
             }
-        }
+        }, onError: { _ in
+                self.output.contentSubject.accept([])
+            })
+            .disposed(by: disposeBag)
+
+        input.searchSubject
+            .asObservable()
+            .filter { $0.isEmpty }
+            .subscribe(onNext: { element in
+                self.output.contentSubject.accept([])
+            })
+            .disposed(by: disposeBag)
     }
 }

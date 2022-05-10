@@ -28,7 +28,7 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.topItem?.backButtonTitle = "back"
         navigationController?.navigationBar.topItem?.titleView?.backgroundColor = UIColor.yellow
-        navigationController?.navigationBar.topItem?.title = title
-        self.title = title
+        //navigationController?.navigationBar.topItem?.title = title
+        //self.title = title
     }
 }

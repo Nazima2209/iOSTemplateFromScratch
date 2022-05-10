@@ -6,29 +6,35 @@
 //
 
 import Foundation
-import UIKit
+import RxSwift
 
-class ViewCoordinator: Coordinator {
-    var navigationController: UINavigationController
-    
-    var childCoordinator = [Coordinator]()
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+class ViewCoordinator: BaseCoordinator {
+    private let router: NavigationRouter
+
+    init(router: NavigationRouter) {
+        self.router = router
+        super.init()
     }
-    
-    func start() {
+
+    override func start() -> Observable<Void> {
         let itunesAPIService = ItunesAPIService()
         let viewModel = ViewModel(itunes: itunesAPIService)
         let rootVc = ViewController(viewModel: viewModel)
-        rootVc.viewModel.delegate = self
-        self.navigationController.pushViewController(rootVc, animated: true)
+
+        // output subscription
+        viewModel.output.showDetail
+            .flatMap { [weak self] content -> Observable<Void> in
+            guard let strongSelf = self else { return .empty() }
+            return strongSelf.showSongDetail(content, in: strongSelf.router)
+        }
+            .subscribe(onNext: { print("Finished Detail") })
+            .disposed(by: disposeBag)
+
+        return router.rx.push(rootVc, animated: true)
+    }
+
+    private func showSongDetail(_ content: ItuneResult, in router: NavigationRouter) -> Observable<Void> {
+        let detailCoordinator = DetailsCoordinator(router: router, content: content)
+        return coordinate(to: detailCoordinator)
     }
 }
-
-extension ViewCoordinator: ViewModelDelegate {
-    func loadSongDetailsScreen(song: ItuneResult) {
-        let detailsCoordinator = DetailsCoordinator(navigationController: navigationController, song: song)
-        detailsCoordinator.start()
-    }
-}
-
